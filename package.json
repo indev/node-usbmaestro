@@ -1,0 +1,22 @@
+{
+	"name": "usbmaestro",
+	"version": "0.0.1",
+	"description": "Used to access the Maestro USB servo controller",
+	"main": "./usbmaestro.node",
+	"keywords": [
+		"usb",
+		"maestro",
+		"servo"
+	],
+	"bin": {
+    	"usbmaestro": "./usbmaestro.node"
+ 	},
+	"scripts": {
+		"preinstall": "node-waf clean || true; node-waf configure build; cp build/Release/usbmaestro.node ./",
+		"preuninstall": "rm -rf build/*"
+	},
+	"repository" : {
+		"type" : "git",
+		"url" : "https://indev@github.com/indev/node-usbmaestro.git"
+	} 
+}
