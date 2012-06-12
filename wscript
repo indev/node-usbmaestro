@@ -1,6 +1,4 @@
-import Options
-from os import unlink, symlink, popen
-from os.path import exists
+import os
 
 def set_options(opt):
   opt.tool_options("compiler_cxx")
@@ -17,7 +15,10 @@ def configure(conf):
 def build(bld):
   obj = bld.new_task_gen("cxx", "shlib", "node_addon")
   obj.target = "usbmaestro"
-  obj.source = ["node_main.cpp", "UsbDevice.cpp"]
+  obj.source = ["src/node_main.cpp", "src/UsbDevice.cpp"]
   obj.uselib = ["USB10"]
   obj.includes = bld.env['CPPPATH_USB10']
   obj.defines = ['VERBOSE=1']
+
+def clean(ctx):
+  os.popen('rm -rf .lock-wscript ./build usbmaestro.node')
