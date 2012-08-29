@@ -9,6 +9,7 @@ UsbDevice *pDevice;
 int main()
 {
     pDevice = new UsbDevice();
+    pDevice->SetVerbose( true );
     pDevice->ConnectToDevice();
 
     u16 target = 0;

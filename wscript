@@ -18,7 +18,6 @@ def build(bld):
   obj.source = ["src/node_main.cpp", "src/UsbDevice.cpp"]
   obj.uselib = ["USB10"]
   obj.includes = bld.env['CPPPATH_USB10']
-  obj.defines = ['VERBOSE=1']
 
 def clean(ctx):
   os.popen('rm -rf .lock-wscript ./build usbmaestro.node')

@@ -16,12 +16,16 @@ class UsbDevice
 
         bool SetTarget( char channel, u16 target );
 
+        inline void SetVerbose( bool verbose ) { this->verbose = verbose; }
+
     protected:
 
         libusb_context *m_pContext;
         libusb_device_handle *m_pDeviceHandle;
 
     private:
+
+        bool verbose;
 };
 
 #endif // USBDEVICE_H
