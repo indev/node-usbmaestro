@@ -1,6 +1,6 @@
 {
 	"name": "usbmaestro",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Used to access the Maestro USB servo controller",
 	"main": "./usbmaestro.node",
 	"keywords": [

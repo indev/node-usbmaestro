@@ -18,7 +18,8 @@ static Handle<Value> ping(const Arguments& args)
 
 static Handle<Value> connect(const Arguments& args)
 {
-    pDevice = new UsbDevice();
+    if ( pDevice == NULL )
+        pDevice = new UsbDevice();
 
     if( pDevice->ConnectToDevice() )
     {
@@ -35,7 +36,7 @@ static Handle<Value> disconnect(const Arguments& args)
         delete pDevice;
         pDevice = NULL;
     }
-    return String::New("1");
+    return True();
 }
 
 static Handle<Value> setTarget(const Arguments& args)
@@ -44,7 +45,21 @@ static Handle<Value> setTarget(const Arguments& args)
     {
         pDevice->SetTarget( args[0]->NumberValue(), args[1]->NumberValue() );
     }
-    return String::New("1");
+    return True();
+}
+
+static Handle<Value> setVerbose(const Arguments& args)
+{
+    if ( pDevice == NULL )
+        pDevice = new UsbDevice();
+
+    if ( args.Length() > 0 ) {
+        bool verbose = args[0]->BooleanValue();
+
+        pDevice->SetVerbose( verbose );
+    }
+
+    return True();
 }
 
 extern "C" {
@@ -54,6 +69,7 @@ extern "C" {
         NODE_SET_METHOD(target, "connect", connect);
         NODE_SET_METHOD(target, "disconnect", disconnect);
         NODE_SET_METHOD(target, "setTarget", setTarget);
+        NODE_SET_METHOD(target, "setVerbose", setVerbose);
     }
 
     NODE_MODULE(usbmaestro, init);
